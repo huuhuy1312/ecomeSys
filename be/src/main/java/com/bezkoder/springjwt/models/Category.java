@@ -22,6 +22,10 @@ public class Category {
     @Column(unique = true)
     private String name;
 
+    @OneToOne
+    @JoinColumn(name="category_parent_id")
+    private Category categoryParent;
+
     @OneToMany(mappedBy = "category")
     @JsonBackReference
     private List<Product> products;

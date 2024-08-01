@@ -303,7 +303,7 @@ function AddProductPage() {
                                         <td>{value1}</td>
                                         <td>{value2}</td>
                                         <td>
-                                            <input type="file"  accept="image/*" />
+                                            <input type="file" placeholder="" accept="image/*" />
                                         </td>
                                         <td>
                                         <CurrencyInput

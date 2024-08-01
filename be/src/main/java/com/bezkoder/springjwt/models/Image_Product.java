@@ -2,10 +2,7 @@ package com.bezkoder.springjwt.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
@@ -13,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name ="images_product")
+@Builder
 public class Image_Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +18,7 @@ public class Image_Product {
     @Lob
     @Column( columnDefinition = "longtext")
     private String image;
+
 
     @ManyToOne
     @JoinColumn(name="product_id")
@@ -32,4 +31,7 @@ public class Image_Product {
         this.image = image;
     }
 
+    public Image_Product(String image) {
+        this.image = image;
+    }
 }

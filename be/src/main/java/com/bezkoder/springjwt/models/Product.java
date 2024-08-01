@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,13 +15,15 @@ import java.util.Optional;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@Builder
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     @Lob
-    @Column( columnDefinition = "longtext")
+    @Column(columnDefinition = "longtext")
     private String description;
     private double rate_star;
     private long quantity;
@@ -41,6 +40,7 @@ public class Product {
     private Seller seller;
 
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonManagedReference
     private List<TypesOfProduct> typesOfProducts;
 
     @ManyToOne
@@ -91,5 +91,21 @@ public class Product {
         this.category = category;
         this.supplier = supplier;
 
+    }
+
+    public Product(String name, String description, long quantity, long priceMin, long priceMax, String title1, String title2, Seller seller, List<TypesOfProduct> typesOfProducts, Category category, Supplier supplier, List<Image_Product> imageProducts, List<ImageClassifications1> imageClassifications1List) {
+        this.name = name;
+        this.description = description;
+        this.quantity = quantity;
+        this.priceMin = priceMin;
+        this.priceMax = priceMax;
+        this.title1 = title1;
+        this.title2 = title2;
+        this.seller = seller;
+        this.typesOfProducts = typesOfProducts;
+        this.category = category;
+        this.supplier = supplier;
+        this.imageProducts = imageProducts;
+        this.imageClassifications1List = imageClassifications1List;
     }
 }
